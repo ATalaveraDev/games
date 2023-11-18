@@ -1,6 +1,6 @@
 import './App.css';
 
-import GamesList from './components/games-list/games-list';
+import GamesList from './components/games-list/GamesList';
 
 function App() {
   return (
