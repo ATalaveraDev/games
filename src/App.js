@@ -17,17 +17,26 @@ async function getGames() {
 }
 
 function App() {
-  const { data: searchedGames, isFetching, error } = useFetch(getGames, []);
+  const { data: searchedGames, setData: setSearchedData, isFetching, error } = useFetch(getGames, []);
   const [selectedGames, setSelectedGames] = useState([]);
 
-  function selectGameHandler(event) {
+  function selectGameHandler(gameSelected) {
     setSelectedGames((prevSelectedData) => {
       let newSelectedData = [...prevSelectedData];
-      const index = newSelectedData.indexOf(event.target.id);
+      const index = newSelectedData.findIndex(element => element.id === gameSelected.id);
 
-      index === -1 ? newSelectedData.unshift(event.target.id) : newSelectedData.splice(index, 1);
+      index === -1 ? newSelectedData.unshift({...gameSelected}) : newSelectedData.splice(index, 1);
 
       return newSelectedData;
+    });
+    
+    setSearchedData((prevSearchedData) => {
+      let newSearchedData = [...prevSearchedData];
+      const index = newSearchedData.findIndex(element => element.id === gameSelected.id);
+
+      index === -1 ? newSearchedData.unshift({...gameSelected}) : newSearchedData.splice(index, 1);
+
+      return newSearchedData;
     });
   }
 
@@ -36,6 +45,7 @@ function App() {
       <h1>Search Games</h1>
       <GamesList data={searchedGames} isFetching={isFetching} error={error} selectGame={selectGameHandler} />
       <h1>Selected Games</h1>
+      <GamesList data={selectedGames} selectGame={selectGameHandler} />
     </div>
   );
 }
