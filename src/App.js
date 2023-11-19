@@ -16,28 +16,22 @@ async function getGames() {
   return data;
 }
 
+function toggleGameFromList(list, game) {
+  let newSelectedData = [...list];
+  const index = newSelectedData.findIndex(element => element.id === game.id);
+
+  index === -1 ? newSelectedData.unshift({...game}) : newSelectedData.splice(index, 1);
+
+  return newSelectedData;
+}
+
 function App() {
-  const { data: searchedGames, setData: setSearchedData, isFetching, error } = useFetch(getGames, []);
+  const { data: searchedGames, setData: setSearchedGames, isFetching, error } = useFetch(getGames, []);
   const [selectedGames, setSelectedGames] = useState([]);
 
   function selectGameHandler(gameSelected) {
-    setSelectedGames((prevSelectedData) => {
-      let newSelectedData = [...prevSelectedData];
-      const index = newSelectedData.findIndex(element => element.id === gameSelected.id);
-
-      index === -1 ? newSelectedData.unshift({...gameSelected}) : newSelectedData.splice(index, 1);
-
-      return newSelectedData;
-    });
-    
-    setSearchedData((prevSearchedData) => {
-      let newSearchedData = [...prevSearchedData];
-      const index = newSearchedData.findIndex(element => element.id === gameSelected.id);
-
-      index === -1 ? newSearchedData.unshift({...gameSelected}) : newSearchedData.splice(index, 1);
-
-      return newSearchedData;
-    });
+    setSelectedGames((selectedData) => toggleGameFromList(selectedData, gameSelected));
+    setSearchedGames((searchedData) => toggleGameFromList(searchedData, gameSelected));
   }
 
   return (
