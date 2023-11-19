@@ -5,8 +5,9 @@ import { useState } from 'react';
 import { useFetch } from './hooks/useFetch';
 import GamesList from './components/games-list/GamesList';
 
-async function getGames() {
-  const response = await fetch('http://localhost:3001/videogames');
+async function getGames(search) {
+  const searchQuery = search ? `?name=${search}` : '';
+  const response = await fetch(`http://localhost:3001/videogames${searchQuery}`);
   const data = await response.json();
 
   if (!response.ok) {
@@ -34,8 +35,14 @@ function App() {
     setSearchedGames((searchedData) => toggleGameFromList(searchedData, gameSelected));
   }
 
+  async function searchInputHandler(event) {
+    const data = await getGames(event.target.value);
+    setSearchedGames(data.results);
+  }
+
   return (
     <div className="App">
+      <input type="text" onChange={searchInputHandler} placeholder="Search game by title...." />
       <h1>Search Games</h1>
       <GamesList data={searchedGames} isFetching={isFetching} error={error} selectGame={selectGameHandler} />
       <h1>Selected Games</h1>
