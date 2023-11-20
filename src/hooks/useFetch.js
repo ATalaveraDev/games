@@ -11,7 +11,7 @@ export function useFetch(fetchFn, dataInitialState) {
       
       try {
         const data = await fetchFn();
-        setData(data.results);
+        setData(data);
       } catch (error) {
         setError('ERROR while fetching data');
       }
