@@ -25,3 +25,19 @@ export async function searchGames(search) {
     return { ...game };
   });
 }
+
+export function deriveGamesState(games) {
+  let searchedGames = [];
+  let selectedGames = [];
+
+  games.forEach(game => {
+    if (game.status === 'unselected') {
+      searchedGames.unshift(game);
+    }
+    if (game.status === 'selected') {
+      selectedGames.unshift(game);
+    }
+  });
+
+  return { searchedGames, selectedGames };
+}

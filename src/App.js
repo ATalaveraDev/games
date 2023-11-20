@@ -4,24 +4,8 @@ import { useFetch } from './hooks/useFetch';
 import { useDebounce } from './hooks/useDebounce';
 import GamesList from './components/games-list/GamesList';
 
-import { searchGames, getGames } from './helpers/games';
+import { searchGames, getGames, deriveGamesState } from './helpers/games';
 
-
-function deriveGamesState(games) {
-  let searchedGames = [];
-  let selectedGames = [];
-
-  games.forEach(game => {
-    if (game.status === 'unselected') {
-      searchedGames.unshift(game);
-    }
-    if (game.status === 'selected') {
-      selectedGames.unshift(game);
-    }
-  });
-
-  return { searchedGames, selectedGames };
-}
 
 function App() {
   const { data: games, setData: setGames, isFetching, error } = useFetch(getGames, []);
@@ -49,7 +33,7 @@ function App() {
         
         return { ...element, status: index !== -1 ? prevGamesCopy[index].status : 'unselected' };
       });
-    })
+    });
   }
 
   return (
