@@ -3,6 +3,7 @@ import './App.css';
 import { useState, useCallback } from 'react';
 
 import { useFetch } from './hooks/useFetch';
+import { useDebounce } from './hooks/useDebounce';
 import GamesList from './components/games-list/GamesList';
 
 async function getGames(search) {
@@ -29,35 +30,21 @@ function toggleGameFromList(list, game) {
 function App() {
   const { data: searchedGames, setData: setSearchedGames, isFetching, error } = useFetch(getGames, []);
   const [selectedGames, setSelectedGames] = useState([]);
+  const debouncedSearch = useDebounce(search, []);
  
   function selectGameHandler(gameSelected) {
     setSelectedGames((selectedData) => toggleGameFromList(selectedData, gameSelected));
     setSearchedGames((searchedData) => toggleGameFromList(searchedData, gameSelected));
   }
 
-  const debounce = (func) => {
-    let timer;
-    return function (...args) {
-      const context = this;
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => {
-        timer = null;
-        func.apply(context, args);
-      }, 500);
-    };
-  };
-
-  const optimizedFn = useCallback(debounce(search), []);
-
-  async function search(value) {
-    const data = await getGames(value);
-    console.log('CALLED')
+  async function search(event) {
+    const data = await getGames(event.target.value);
     setSearchedGames(data.results);
   }
 
   return (
     <div className="App">
-      <input type="text" onChange={(event) => optimizedFn(event.target.value)} placeholder="Search game by title...." />
+      <input type="text" onChange={debouncedSearch} placeholder="Search game by title...." />
       <h1>Search Games</h1>
       <GamesList data={searchedGames} isFetching={isFetching} error={error} selectGame={selectGameHandler} />
       <h1>Selected Games</h1>
