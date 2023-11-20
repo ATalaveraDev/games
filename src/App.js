@@ -4,39 +4,30 @@ import { useFetch } from './hooks/useFetch';
 import { useDebounce } from './hooks/useDebounce';
 import GamesList from './components/games-list/GamesList';
 
-async function getGames() {
-  const response = await fetch(`http://localhost:3001/videogames`);
-  const data = await response.json();
+import { searchGames, getGames } from './helpers/games';
 
-  if (!response.ok) {
-    throw new Error();
-  }
 
-  return data.results.map(game => { 
-    return { ...game, status: 'unselected' };
+function deriveGamesState(games) {
+  let searchedGames = [];
+  let selectedGames = [];
+
+  games.forEach(game => {
+    if (game.status === 'unselected') {
+      searchedGames.unshift(game);
+    }
+    if (game.status === 'selected') {
+      selectedGames.unshift(game);
+    }
   });
-}
 
-async function searchGames(search, fn) {
-  const searchQuery = `?name=${search}`;
-  const response = await fetch(`http://localhost:3001/videogames${searchQuery}`);
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error();
-  }
-
-  return data.results.map(game => { 
-    return { ...game };
-  });
+  return { searchedGames, selectedGames };
 }
 
 function App() {
   const { data: games, setData: setGames, isFetching, error } = useFetch(getGames, []);
   const debouncedSearch = useDebounce(search, []);
 
-  const searchedGames = games.filter(element => element.status === 'unselected');
-  const selectedGames = games.filter(element => element.status === 'selected');
+  const { searchedGames, selectedGames } = deriveGamesState(games);
  
   function selectGameHandler(gameSelected) {
     setGames((prevGames) => {
