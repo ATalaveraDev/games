@@ -16,7 +16,8 @@ function App() {
   function selectGameHandler(gameSelected) {
     setGames((prevGames) => {
       const games = [...prevGames.map(element => ({...element}))];
-      games[games.findIndex(element => element.id === gameSelected.id)].status = 'selected';
+      const index = games.findIndex(element => element.id === gameSelected.id);
+      games[index].status = games[index].status === 'selected' ? 'unselected' : 'selected';
 
       return games;
     });
