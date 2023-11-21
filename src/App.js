@@ -4,7 +4,7 @@ import { useFetch } from './hooks/useFetch';
 import { useDebounce } from './hooks/useDebounce';
 import GamesList from './components/games-list/GamesList';
 
-import { searchGames, getGames, deriveGamesState } from './helpers/games';
+import { searchGames, getGames, deriveGamesState } from './helpers/search';
 
 
 function App() {
@@ -38,11 +38,15 @@ function App() {
 
   return (
     <div className="App">
-      <input type="text" onChange={debouncedSearch} placeholder="Search game by title...." />
-      <h1>Search Games</h1>
-      <GamesList data={searchedGames} isFetching={isFetching} error={error} selectGame={selectGameHandler} />
-      <h1>Selected Games</h1>
-      <GamesList data={selectedGames} selectGame={selectGameHandler} />
+      <div className="search-container">
+        <h1>Search Games</h1>
+        <input type="text" onChange={debouncedSearch} placeholder="Search game by title...." />
+        <GamesList data={searchedGames} isFetching={isFetching} error={error} selectGame={selectGameHandler} />
+      </div>
+      <div className="selection-container">
+        <h1>Selected Games</h1>
+        <GamesList data={selectedGames} selectGame={selectGameHandler} />
+      </div>
     </div>
   );
 }
