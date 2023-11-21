@@ -36,6 +36,10 @@ function App() {
     });
   }
 
+  function onClickHandler() {
+    console.log(selectedGames);
+  }
+
   return (
     <div className="App">
       <div className="search-container">
@@ -45,6 +49,7 @@ function App() {
       </div>
       <div className="selection-container">
         <h1>Selected Games</h1>
+        {selectedGames.length > 0 && <button onClick={onClickHandler}>Add to my library</button>}
         <GamesList data={selectedGames} selectGame={selectGameHandler} />
       </div>
     </div>
