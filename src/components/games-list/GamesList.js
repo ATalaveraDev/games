@@ -1,4 +1,7 @@
-export default function GamesList({ data, error, isFetching, selectGame }) {
+
+import GameListItem from '../game-list-item/GameListItem';
+
+export default function GamesList({ data, error, isFetching }) {
   if (error) {
     return <p>Error while fetching data</p>;
   }
@@ -6,7 +9,7 @@ export default function GamesList({ data, error, isFetching, selectGame }) {
   return (
     <>
       {isFetching && <p>Fetching games data...</p>}
-      {!isFetching && <ul>{data.map(game => <li key={game.id} id={game.id} onClick={() => selectGame(game)}>{game.name}</li>)}</ul>}
+      {!isFetching && <ul>{data.map(game => <GameListItem key={game.id} game={game} />)}</ul>}
     </>
   );
 }
