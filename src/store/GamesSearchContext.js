@@ -2,11 +2,10 @@ import { createContext } from 'react';
 
 import { useFetch } from '../hooks/useFetch';
 import { useDebounce } from '../hooks/useDebounce';
-import { searchGames, getGames, deriveGamesState } from '../helpers/search';
+import { searchGames, getGames } from '../helpers/search';
 
 export const GamesSearchContext = createContext({
-  searchedGames: [],
-  selectedGames: [],
+  games: [],
   selectGameHandler: () => {},
   onClickHandler: () => {},
   debouncedSearch: [],
@@ -17,8 +16,6 @@ export const GamesSearchContext = createContext({
 export default function GamesSearchContextProvider({children}) {
   const { data: games, setData: setGames, isFetching, error } = useFetch(getGames, []);
   const debouncedSearch = useDebounce(search, []);
-
-  const { searchedGames, selectedGames } = deriveGamesState(games);
  
   function selectGameHandler(gameSelected) {
     setGames((prevGames) => {
@@ -45,12 +42,11 @@ export default function GamesSearchContextProvider({children}) {
   }
 
   function onClickHandler() {
-    console.log(selectedGames);
+    // console.log(selectedGames);
   }
 
   const ctxValue = {
-    searchedGames,
-    selectedGames,
+    games,
     selectGameHandler,
     onClickHandler,
     debouncedSearch,

@@ -1,9 +1,13 @@
 import { useContext } from 'react';
-import { GamesSearchContext } from '../../store/GamesSearchContext';
+
 import GamesList from '../games-list/GamesList';
+import { GamesSearchContext } from '../../store/GamesSearchContext';
+
+import { deriveSelectedGamesState } from '../../helpers/search';
 
 export default function SelectedGames() {
-  const {selectedGames, onClickHandler} = useContext(GamesSearchContext);
+  const {games, onClickHandler} = useContext(GamesSearchContext);
+  const selectedGames = deriveSelectedGamesState(games);
 
   return (
     <>
