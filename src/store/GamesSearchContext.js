@@ -7,7 +7,6 @@ import { searchGames, getGames } from '../helpers/search';
 export const GamesSearchContext = createContext({
   games: [],
   selectGameHandler: () => {},
-  onClickHandler: () => {},
   debouncedSearch: [],
   isFetching: false,
   error: ''
@@ -41,14 +40,9 @@ export default function GamesSearchContextProvider({children}) {
     });
   }
 
-  function onClickHandler() {
-    // console.log(selectedGames);
-  }
-
   const ctxValue = {
     games,
     selectGameHandler,
-    onClickHandler,
     debouncedSearch,
     isFetching,
     error
