@@ -4,15 +4,17 @@ import GamesList from '../games-list/GamesList';
 import { GamesSearchContext } from '../../store/GamesSearchContext';
 
 import { deriveSelectedGamesState } from '../../helpers/search';
+import { ProgressContext } from '../../store/ProgressContext';
 
 export default function SelectedGames() {
-  const {games, onClickHandler} = useContext(GamesSearchContext);
+  const {games} = useContext(GamesSearchContext);
+  const {showResume} = useContext(ProgressContext);
   const selectedGames = deriveSelectedGamesState(games);
 
   return (
     <>
       <h1>Selected Games</h1>
-      {selectedGames.length > 0 && <button onClick={onClickHandler}>Add to my library</button>}
+      {selectedGames.length > 0 && <button onClick={showResume}>Add to my library</button>}
       <GamesList data={selectedGames} />
     </>
   );
