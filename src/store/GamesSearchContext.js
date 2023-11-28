@@ -8,6 +8,7 @@ export const GamesSearchContext = createContext({
   games: [],
   selectGameHandler: () => {},
   debouncedSearch: [],
+  saveGames: () => {},
   isFetching: false,
   error: ''
 });
@@ -40,10 +41,29 @@ export default function GamesSearchContextProvider({children}) {
     });
   }
 
+  async function saveGames(games) {
+    await fetch('http://localhost:3001/videogames', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(games)
+    });
+    setGames(prevGames => {
+      return prevGames.map((game) => {
+        return {
+          ...game,
+          status: 'unselected',
+        };
+      });
+    });
+  }
+
   const ctxValue = {
     games,
     selectGameHandler,
     debouncedSearch,
+    saveGames,
     isFetching,
     error
   };
