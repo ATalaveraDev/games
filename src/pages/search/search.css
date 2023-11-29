@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.search-container, .selection-container {
+  flex: 1;
+}

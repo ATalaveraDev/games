@@ -1,26 +1,18 @@
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
 import './App.css';
 
-import GamesSearchContextProvider from './store/GamesSearchContext';
-import SelectedGames from './components/selected-games/selected-games';
-import SearchedGames from './components/searched-games/searched-games';
-import Confirmation from './components/Confirmation';
-import ProgressContextProvider from './store/ProgressContext';
+import SearchPage from './pages/search/search';
+import UserGamesPage from './pages/user-games/user-games';
+
+const router = createBrowserRouter([
+  { path: '/', element: <SearchPage /> },
+  { path: '/user-games', element: <UserGamesPage /> },
+]);
 
 function App() {
   return (
-    <div className='App'>
-      <GamesSearchContextProvider>
-        <ProgressContextProvider>
-          <div className='search-container'>
-            <SearchedGames />
-          </div>
-          <div className='selection-container'>
-            <SelectedGames />
-          </div>
-          <Confirmation />
-        </ProgressContextProvider>
-      </GamesSearchContextProvider>
-    </div>
+    <RouterProvider router={router} />
   );
 }
 
