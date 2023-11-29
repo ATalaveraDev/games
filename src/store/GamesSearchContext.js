@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { useFetch } from '../hooks/useFetch';
 import { useDebounce } from '../hooks/useDebounce';
@@ -16,6 +17,7 @@ export const GamesSearchContext = createContext({
 export default function GamesSearchContextProvider({children}) {
   const { data: games, setData: setGames, isFetching, error } = useFetch(getGames, []);
   const debouncedSearch = useDebounce(search, []);
+  const navigate = useNavigate();
  
   function selectGameHandler(gameSelected) {
     setGames((prevGames) => {
@@ -57,6 +59,7 @@ export default function GamesSearchContextProvider({children}) {
         };
       });
     });
+    navigate('/user-games');
   }
 
   const ctxValue = {
