@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 
-import Modal from './common/Modal';
-import { ProgressContext } from '../store/ProgressContext';
-import { GamesSearchContext } from '../store/GamesSearchContext';
+import Modal from '../ui/modal';
+import { ProgressContext } from '../../store/ProgressContext';
+import { GamesSearchContext } from '../../store/GamesSearchContext';
 
 export default function Confirmation() {
   const {resume, hideResume} = useContext(ProgressContext);

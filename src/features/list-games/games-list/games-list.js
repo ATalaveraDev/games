@@ -1,5 +1,5 @@
 
-import GameListItem from '../game-list-item/GameListItem';
+import GameListItem from '../games-list-item/games-list-item';
 
 export default function GamesList({ data, error, isFetching }) {
   if (error) {

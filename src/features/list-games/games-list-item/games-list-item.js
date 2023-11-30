@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import { GamesSearchContext } from '../../store/GamesSearchContext';
+import { GamesSearchContext } from '../../../store/GamesSearchContext';
 
 export default function GameListItem({ game }) {
   const { selectGameHandler } = useContext(GamesSearchContext);
