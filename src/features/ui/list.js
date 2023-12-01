@@ -6,9 +6,7 @@ export default function List({ data, error, isFetching, onSelectItem, actions })
     return <p>Error while fetching data</p>;
   }
 
-  let list;
-
-  list = data.map((item) => {
+  const list = data.map((item) => {
     if (actions) {
       return (
         <ListItem key={item._id} id={item._id}>
