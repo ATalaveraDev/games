@@ -12,11 +12,7 @@ export default function Modal({children, open}) {
   const dialog = useRef();
 
   useEffect(() => {
-    if (open) {
-      dialog.current.showModal();
-    } else {
-      dialog.current.close();
-    }
+    open ? dialog.current.showModal() : dialog.current.close();
   }, [open]);
 
   let element = document.getElementById('modal');
