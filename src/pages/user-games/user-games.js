@@ -15,10 +15,21 @@ async function getUserGames() {
 export default function UserGamesPage() {
   const { data: games } = useFetch(getUserGames, []);
 
+  const actions = [
+    {
+      label: 'Edit',
+      fn: () => console.log('Edit game')
+    },
+    {
+      label: 'Delete',
+      fn: () => console.log('Delete game')
+    }
+  ];
+
   return (
     <>
       <h1>User Games</h1>
-      <List data={games} />
+      <List data={games} actions={actions} />
     </>
   );
 }
