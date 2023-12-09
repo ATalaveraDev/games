@@ -14,9 +14,16 @@ export default function GameDetailsModal() {
     }));
   }
   
-  function submitHandler(event) {
+  async function submitHandler(event) {
     event.preventDefault();
     console.log(game)
+    await fetch(`http://localhost:3001/user/videogames/${game.rawgId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(game)
+    });
   }
 
   return (
