@@ -4,8 +4,8 @@ import Modal from '../ui/modal';
 import { UserGamesContext } from '../../pages/user-games/user-games-context';
 
 export default function GameDetailsModal() {
-  const {modalOpen} = useContext(UserGamesContext);
-  const [game, setGame] = useState({ status: '', platform: '' });
+  const {modalOpen, gameToEdit} = useContext(UserGamesContext);
+  const [game, setGame] = useState({ status: gameToEdit.status, platform: gameToEdit.platform });
 
   function changeHandler(event, field) {
     setGame((prevGame) => ({
@@ -16,8 +16,7 @@ export default function GameDetailsModal() {
   
   async function submitHandler(event) {
     event.preventDefault();
-    console.log(game)
-    await fetch(`http://localhost:3001/user/videogames/${game.rawgId}`, {
+    await fetch(`http://localhost:3001/user/videogames/${gameToEdit.rawgId}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
@@ -31,14 +30,14 @@ export default function GameDetailsModal() {
       <h1>Game Details</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="status">Status</label>
-        <select id="status" defaultValue="" onChange={(event) => changeHandler(event, 'status')}>
+        <select id="status" value={gameToEdit.status} onChange={(event) => changeHandler(event, 'status')}>
           <option hidden value="">Select an option</option>
           <option value="NOT_STARTED">Not started</option>
           <option value="IN_PROGRESS">In Progress</option>
           <option value="FINISHED">Finished</option>
         </select>
         <label htmlFor="platform">Platform</label>
-        <input type="text" id="platform"  onChange={(event) => changeHandler(event, 'platform')} />
+        <input type="text" id="platform" onChange={(event) => changeHandler(event, 'platform')} value={gameToEdit.platform} />
         <button>Accept</button>
       </form>
     </Modal>

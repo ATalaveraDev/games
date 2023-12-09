@@ -1,8 +1,8 @@
-export default function ListItemActions({actions}) {
+export default function ListItemActions({itemId, actions}) {
   return (
     <>
       {actions.map((item) => (
-        <button key={item.label} onClick={item.fn}>{item.label}</button>
+        <button key={item.label} onClick={() => item.fn(itemId)}>{item.label}</button>
       ))}
     </>
   );

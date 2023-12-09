@@ -5,13 +5,18 @@ export const UserGamesContext = createContext({
   editGame: () => {},
   deleteGame: () => {},
   closeGameDetails: () => {},
-  modalOpen: false
+  modalOpen: false,
+  gameToEdit: {}
 });
 
 export default function UserGamesContextProvider({ children }) {
   const [modalOpen, setModalOpen] = useState(false);
+  const [gameToEdit, setGameToEdit] = useState({ platform: '', status: '' });
 
-  function openGameDetails() {
+  async function openGameDetails(itemId) {
+    const response = await fetch(`http://localhost:3001/user/videogames/${itemId}`);
+    const data = await response.json();
+    setGameToEdit(data);
     setModalOpen(true);
   }
   
@@ -28,7 +33,8 @@ export default function UserGamesContextProvider({ children }) {
     editGame,
     deleteGame,
     closeGameDetails,
-    modalOpen
+    modalOpen,
+    gameToEdit
   };
 
   return (

@@ -23,7 +23,7 @@ export default function EditableGamesList() {
   const actions = [
     {
       label: 'Edit',
-      fn: () => openGameDetails()
+      fn: (itemId) => openGameDetails(itemId)
     },
     {
       label: 'Delete',

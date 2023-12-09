@@ -11,7 +11,7 @@ export default function List({ data, error, isFetching, onSelectItem, actions })
       return (
         <ListItem key={item._id} id={item._id}>
           <span>{item.name}</span>
-          <ListItemActions actions={actions} />
+          <ListItemActions itemId={item.rawgId} actions={actions} />
         </ListItem>
       );
     } else {
