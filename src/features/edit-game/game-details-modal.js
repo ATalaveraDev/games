@@ -4,7 +4,7 @@ import Modal from '../ui/modal';
 import { UserGamesContext } from '../../pages/user-games/user-games-context';
 
 export default function GameDetailsModal() {
-  const {modalOpen, gameToEdit} = useContext(UserGamesContext);
+  const {modalOpen, gameToEdit, closeGameDetails} = useContext(UserGamesContext);
   const [game, setGame] = useState({ status: gameToEdit.status, platform: gameToEdit.platform });
 
   function changeHandler(event, field) {
@@ -25,8 +25,12 @@ export default function GameDetailsModal() {
     });
   }
 
+  function closeHandler() {
+    closeGameDetails();
+  }
+
   return (
-    <Modal open={modalOpen}>
+    <Modal open={modalOpen} closeHandler={closeHandler}>
       <h1>Game Details</h1>
       <form onSubmit={submitHandler}>
         <label htmlFor="status">Status</label>

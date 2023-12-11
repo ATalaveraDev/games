@@ -8,10 +8,11 @@ function createWrapperAndAppendToBody() {
   return wrapperElement;
 }
 
-export default function Modal({children, open}) {
+export default function Modal({children, open, closeHandler}) {
   const dialog = useRef();
 
   useEffect(() => {
+    console.log('open')
     open ? dialog.current.showModal() : dialog.current.close();
   }, [open]);
 
@@ -22,7 +23,7 @@ export default function Modal({children, open}) {
   }
 
   return createPortal(
-    <dialog ref={dialog}>{children}</dialog>,
+    <dialog ref={dialog} onClose={closeHandler}>{children}</dialog>,
     element
   );
 }
