@@ -12,7 +12,6 @@ export default function Modal({children, open, closeHandler}) {
   const dialog = useRef();
 
   useEffect(() => {
-    console.log('open')
     open ? dialog.current.showModal() : dialog.current.close();
   }, [open]);
 
