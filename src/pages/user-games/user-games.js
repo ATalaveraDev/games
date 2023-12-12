@@ -9,3 +9,14 @@ export default function UserGamesPage() {
     </UserGamesContextProvider>
   );
 }
+
+export async function loader() {
+  const response = await fetch(`http://localhost:3001/user/videogames`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    // throw new Error();
+  }
+
+  return data;
+}
