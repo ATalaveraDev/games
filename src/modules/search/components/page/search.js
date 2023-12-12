@@ -1,8 +1,8 @@
-import Confirmation from '../../features/add-games/confirmation';
-import ProgressContextProvider from '../../store/ProgressContext';
-import GamesSearchContextProvider from '../../store/GamesSearchContext';
-import SearchedGames from '../../features/search-games/searched-games/searched-games';
-import SelectedGames from '../../features/add-games/selected-games/selected-games';
+import Confirmation from '../confirmation-modal/confirmation';
+import ProgressContextProvider from '../../ProgressContext';
+import GamesSearchContextProvider from '../../GamesSearchContext';
+import SearchedGames from '../searched-games/searched-games';
+import SelectedGames from '../selected-games/selected-games';
 
 import './search.css';
 

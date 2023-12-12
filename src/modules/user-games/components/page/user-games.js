@@ -1,5 +1,5 @@
-import UserGamesContextProvider from './user-games-context';
-import EditableGamesList from '../../features/edit-game/editable-games-list';
+import UserGamesContextProvider from '../../user-games-context';
+import EditableGamesList from '../games-list/editable-games-list';
 
 export default function UserGamesPage() {
   return (

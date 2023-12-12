@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 
-import { GamesSearchContext } from '../../../store/GamesSearchContext';
+import { GamesSearchContext } from '../../GamesSearchContext';
 
-import List from '../../ui/list';
-import { ProgressContext } from '../../../store/ProgressContext';
-import { deriveSelectedGamesState } from '../../../helpers/search';
+import List from '../../../../components/ui/list';
+import { ProgressContext } from '../../ProgressContext';
+import { deriveSelectedGamesState } from '../../helpers/search';
 
 export default function SelectedGames() {
   const {games, selectGameHandler} = useContext(GamesSearchContext);

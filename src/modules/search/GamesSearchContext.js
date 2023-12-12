@@ -1,9 +1,9 @@
 import { createContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useFetch } from '../hooks/useFetch';
-import { useDebounce } from '../hooks/useDebounce';
-import { searchGames, getGames } from '../helpers/search';
+import { useFetch } from '../../hooks/useFetch';
+import { useDebounce } from '../../hooks/useDebounce';
+import { searchGames, getGames } from './helpers/search';
 
 export const GamesSearchContext = createContext({
   games: [],

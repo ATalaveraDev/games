@@ -2,8 +2,8 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import './App.css';
 
-import SearchPage from './pages/search/search';
-import UserGamesPage, { loader as UserGamesLoader } from './pages/user-games/user-games';
+import SearchPage from './modules/search/components/page/search';
+import UserGamesPage, { loader as UserGamesLoader } from './modules/user-games/components/page/user-games';
 
 const router = createBrowserRouter([
   { index: true, element: <SearchPage /> },

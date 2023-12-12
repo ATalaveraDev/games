@@ -1,9 +1,9 @@
 import { useContext } from 'react';
 
-import { GamesSearchContext } from '../../../store/GamesSearchContext';
+import { GamesSearchContext } from '../../GamesSearchContext';
 
-import { deriveSearchedGamesState } from '../../../helpers/search';
-import List from '../../ui/list';
+import { deriveSearchedGamesState } from '../../helpers/search';
+import List from '../../../../components/ui/list';
 
 export default function SearchedGames() {
   const {debouncedSearch, games, isFetching, error, selectGameHandler} = useContext(GamesSearchContext);

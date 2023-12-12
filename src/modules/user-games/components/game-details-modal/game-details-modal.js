@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 
-import Modal from '../ui/modal';
-import { UserGamesContext } from '../../pages/user-games/user-games-context';
+import Modal from '../../../../components/ui/modal';
+import { UserGamesContext } from '../../user-games-context';
 
 export default function GameDetailsModal() {
   const {modalOpen, gameToEdit, closeGameDetails} = useContext(UserGamesContext);
